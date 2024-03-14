@@ -1,5 +1,3 @@
-// Interface.js
-
 import React, { useState } from 'react';
 import SourceSelection from './SourceSelector';
 import SourceDialog from './SourceDialog';
