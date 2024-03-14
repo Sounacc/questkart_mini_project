@@ -1,0 +1,20 @@
+/* SourceSelection.css */
+
+.source-selection-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
+    margin-bottom: 5vh;
+    min-width: 145vh;
+  }
+  
+  .source-selection-form-control {
+    min-width: 150px;
+    margin: 0 5px;
+  }
+  
+  .source-selection-select {
+    min-width: 360px;
+  }
+  

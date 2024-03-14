@@ -1,0 +1,44 @@
+/* styles.css */
+
+/* Apply flexbox layout to the container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Set height to 100% of viewport height */
+  }
+  
+  /* Adjust spacing between items */
+  .item {
+    margin-right: 10px; /* Adjust as needed */
+  }
+  
+  /* Set width for each item */
+  .item:nth-child(odd) {
+    width: calc(50% - 5px); /* Subtract half of the margin */
+  }
+  
+  .item:nth-child(even) {
+    width: calc(50% - 5px); /* Subtract half of the margin */
+  }
+  
+  /* Clear margin for the last item in each row */
+  .item:nth-child(2n) {
+    margin-right: 0;
+  }
+/* NewInterface.css */
+
+.operation-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%; /* Set width to half of the screen */
+    margin: 0 auto; /* Center the button horizontally */
+  }
+.operation-component-button {
+    display: flexbox; /* Center the button horizontally */
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 100%; /* Add top margin for spacing */
+  }
+/* NewInterface.css */
