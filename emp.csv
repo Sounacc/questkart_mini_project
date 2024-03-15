@@ -1,0 +1,5 @@
+employee_id,name,department_id,position,salary,hire_date
+1,John Doe,1,Software Engineer,60000.00,2020-01-15
+2,Jane Smith,1,Data Analyst,55000.00,2019-07-20
+3,Alice Johnson,2,HR Manager,70000.00,2018-05-10
+4,Bob Brown,3,Marketing Specialist,65000.00,2021-03-05
