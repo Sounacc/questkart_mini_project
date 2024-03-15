@@ -8,6 +8,7 @@ import { Grid } from '@mui/material';
 import { handleSourceChange, handleFileSelection, handleDatabaseInfoChange, handleDatabaseSubmit, handleOperationChange } from './EventHandlers';
 import './NewInterface.css';
 import operations from './ConstOperation';
+import CaptureButton from './ProceedButton';
 
 const NewInterface = () => {
   const [sources, setSources] = useState([
@@ -61,6 +62,7 @@ const NewInterface = () => {
         operations={operations}
         handleOperationChange={handleOperationChange}
       />
+      <CaptureButton sources={sources} />
     </div>
   );
 };

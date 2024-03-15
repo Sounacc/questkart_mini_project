@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Papa from 'papaparse';
-import { handleFileSelection, handleSourceChange } from './EventHandlers';
+import {handleSourceChange } from './EventHandlers';
 
 const CsvHandler = () => {
   const [sources, setSources] = useState([
