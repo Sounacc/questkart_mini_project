@@ -4,6 +4,17 @@ import PgDetails from './Pgdetails'; // Import your PgDetails component
 import ColumnsDisplay from './ColumnsDropdown'; 
 import Operation from './Operations'
 
+/**
+ * Component for database operations.
+ * Allows the user to select a database, schema, and table, and perform operations on it.
+ *
+ * @param {Object} props - Component props.
+ * @param {Function} props.setOpenDbDialog - Function to set the open state of the database dialog.
+ * @param {boolean} props.isDbDialogOpen - Boolean state indicating if the database dialog is open.
+ * @param {Function} props.onSelections - Function to handle selections made by the user.
+ * @returns {React.Component} A React component for database operations.
+ */
+
 
 function Dbcomp1({ setOpenDbDialog, isDbDialogOpen,onSelections }) {
   const [currentStep, setCurrentStep] = useState('dbChoice'); // New state to track dialog steps
@@ -24,6 +35,10 @@ function Dbcomp1({ setOpenDbDialog, isDbDialogOpen,onSelections }) {
     }
   }, [isDbDialogOpen]);
 
+  /**
+   * Resets the component state to its initial values.
+   */
+
   const resetState = () => {
     setCurrentStep('dbChoice');
     setSchemas([]);
@@ -35,6 +50,12 @@ function Dbcomp1({ setOpenDbDialog, isDbDialogOpen,onSelections }) {
     setOperationSelected(false);
   };
 
+  /**
+   * Handles the submission of database credentials and moves to schema selection step.
+   *
+   * @param {Array} schemas - Array of schemas fetched based on credentials.
+   */
+  
   const handleCredentialsSubmit = (schemas) => {
     setSchemas(schemas);
     setCurrentStep('schemaSelection'); // Move to the next step

@@ -86,28 +86,33 @@ function BasicExample(props) {
   return (
     <div className={styles.container}>
       <Button
-        className={styles.button}
-        aria-controls="basic-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-        sx={{
-          borderColor: 'primary.main',
-          borderWidth: '1px',
-          borderStyle: 'solid',
-          '&:hover': {
-            backgroundColor: 'primary.light',
-            borderColor: 'primary.dark',
-          },
-          color: 'primary.main',
-        }}
-      >
-        {props.name}
-      </Button>
+  aria-controls="basic-menu"
+  aria-haspopup="true"
+  onClick={handleClick}
+  style={{
+    backgroundColor: '#56d75a', // Green
+    border: 'none',
+    color: 'white',
+    padding: '15px 32px',
+    textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    fontSize: '16px',
+    margin: '4px 2px',
+    cursor: 'pointer',
+    borderColor: 'primary.main',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    // Note: ':hover' pseudo-class cannot be used within inline styles
+  }}
+>
+  {props.name}
+</Button>
 
       <Menu id="basic-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem onClick={handleClickFileInput}>File</MenuItem>
         <MenuItem onClick={handleOpenDbDialog}>Database</MenuItem>
-        <MenuItem onClick={handleClose}>App</MenuItem>
+        {/* <MenuItem onClick={handleClose}>App</MenuItem> */}
       </Menu>
       <input type="file" ref={fileInput} onChange={handleFileChange} style={{ display: 'none' }} />
       <p className={styles.selectionMessage}>{selectionMessage()}</p>

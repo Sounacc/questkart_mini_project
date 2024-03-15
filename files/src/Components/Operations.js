@@ -27,10 +27,14 @@ function JoinOperationSelect() {
       {/* Conditionally render the submit button if joinType is not empty */}
       {joinType && (
         <Button
+          onClick={()=>{
+            alert("JSON is  generated")
+          }}
           variant="contained"
           sx={{ alignSelf: 'center' }} // Center the button (useful if not using a wrapping Box)
         >
-          Submit
+          Proceed
+          
         </Button>
       )}
     </Box>
