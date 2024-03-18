@@ -4,6 +4,7 @@ import Dbcomp1 from './Dbcomp1'; // Ensure this path matches your file structure
 import ColumnsDisplay from './ColumnsDropdown';
 import Papa from 'papaparse';
 import styles from './BasicExample.module.css';
+import { parse, isValid } from 'date-fns';
 
 function BasicExample(props) {
   const [selectionType, setSelectionType] = useState(''); // Track what is selected ('file' or 'database')
@@ -29,14 +30,75 @@ function BasicExample(props) {
   };
 
   const parseCsvHeaders = (file) => {
-    Papa.parse(file, {
-      complete: (results) => {
-        const headers = results.data[0]; // Assuming the first row contains headers
-        setCsvHeaders(headers); // Update state with CSV headers
-      },
-      preview: 1, // Only parse the first row to get headers
-    });
-  };
+  Papa.parse(file, {
+    complete: (results) => {
+      const headers = results.data[0]; // Assuming the first row contains headers
+      const dataTypes = headers.map((header, index) => inferColumnType(results.data.slice(1), index));
+      setCsvHeaders(headers.map((header, index) => ({ name: header, type: dataTypes[index] }))); // Update state with headers and inferred types
+      console.log(setCsvHeaders);
+    },
+  });
+};
+
+
+
+const inferColumnType = (data, columnIndex) => {
+  let numericCount = 0;
+  let dateCount = 0;
+  let stringCount = 0;
+
+  // Limit the loop to the first 10 rows or the total number of rows, whichever is smaller
+  const rowsToCheck = Math.min(data.length, 10);
+
+  for (let rowIndex = 0; rowIndex < rowsToCheck; rowIndex++) {
+    const row = data[rowIndex];
+    if (row.length <= columnIndex) continue; // Skip if the column doesn't exist in this row
+
+    const value = row[columnIndex];
+    if (value === undefined || value === null || value.trim() === '') {
+      continue; // Skip empty values
+    }
+
+    let processedValue = value.trim();
+    // Specifically check for prices (values starting with '$')
+    if (processedValue.startsWith('$')) {
+      processedValue = processedValue.replace(/[$,]+/g, ''); // Remove $ and commas
+      const numericValue = parseFloat(processedValue);
+      if (!isNaN(numericValue)) {
+        numericCount++;
+        continue; // Move to the next iteration as we've classified this as numeric
+      }
+    }
+
+    // Attempt to parse as a date
+    const date = new Date(value);
+    const isDateValid = !isNaN(date.getTime()) && /[-\/]/.test(value);
+    if (isDateValid) {
+      dateCount++;
+      continue;
+    }
+
+    // If it's neither clearly numeric nor a valid date, consider it a string
+    const numericValue = parseFloat(processedValue.replace(/,/g, '')); // Also consider general numeric values without $
+    if (!isNaN(numericValue) && numericValue.toString() === processedValue.replace(/,/g, '')) {
+      numericCount++;
+    } else {
+      stringCount++;
+    }
+  }
+
+  // Decision logic to determine the predominant data type in the column
+  if (dateCount > numericCount && dateCount > stringCount) {
+    return 'Date';
+  } else if (numericCount > dateCount && numericCount > stringCount) {
+    return 'Number';
+  } else {
+    return 'String';
+  }
+};
+
+
+
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -122,7 +184,7 @@ function BasicExample(props) {
         onSelections={handleSelections}
       />
       {/* Conditional rendering based on selectionType */}
-      {selectionType && csvHeaders.length > 0 && <ColumnsDisplay columns={csvHeaders} />}
+      {selectionType && csvHeaders.length > 0 && <ColumnsDisplay columns={csvHeaders} label={props.name} />}
     </div>
   );
 }

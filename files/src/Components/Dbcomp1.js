@@ -104,9 +104,14 @@ function Dbcomp1({ setOpenDbDialog, isDbDialogOpen,onSelections }) {
       });
      
       const columnsData = await response.json();
-      const columnNames = columnsData.map(column => column.column_name);
-      setColumns(columnNames); // Store the column names in the state
-      onSelections(selectedDb, selectedSchema, table, columnNames); // Pass the database, schema, table, and columns to the parent component
+      const formattedColumnsData = columnsData.map(col => ({
+        name: col.column_name, // Adjust based on your actual data structure
+        type: col.data_type // Adjust based on your actual data structure
+      }));
+      setColumns(formattedColumnsData); // Store the formatted columns in the state
+
+      // Call onSelections with the database, schema, table, and formatted columns
+      onSelections(selectedDb, selectedSchema, table, formattedColumnsData);
     } catch (error) {
       console.error('Error fetching columns:', error);
     }

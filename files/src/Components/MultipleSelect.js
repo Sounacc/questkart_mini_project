@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -7,9 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
-// import styles from './MultipleSelectChip.module.css';
-
-// import ChildComponent from './NewFormat_displayValues';
+import Button from '@mui/material/Button';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -31,43 +29,31 @@ function getStyles(name, personName, theme) {
   };
 }
 
-function MultipleSelectChip(props) {
+function MultipleSelectChip({ props: columns, label }) {
   const theme = useTheme();
-  const [personName1, setPersonName1] = React.useState([]);
-  const [personName2, setPersonName2] = React.useState([]);
+  const [selectedColumns, setSelectedColumns] = React.useState([]);
 
-  const handleChange = (event, dropdown) => {
+  const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    if (dropdown === 1) {
-      setPersonName1(
-        // On autofill we get a stringified value.
-        typeof value === 'string' ? value.split(',') : value,
-      );
-    } else if (dropdown === 2) {
-      setPersonName2(
-        typeof value === 'string' ? value.split(',') : value,
-      );
-    }
+    setSelectedColumns(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
   };
-
-  const combinedValues = [...personName1, ...personName2];
-
-  const sourceNameLength = props.label ? props.label.length : 0;
-  const controlWidth = 300 + sourceNameLength * 8; // Adjust width based on source name length
 
   return (
     <div>
-      <FormControl  sx={{ m: 1, width: controlWidth }}>
-        <InputLabel id={`demo-multiple-chip-label-${props.label}`}>{props.label}</InputLabel>
+      <FormControl sx={{ m: 1, width: 300 }}>
+        <InputLabel id={`demo-multiple-chip-label-${label}`}>{label}</InputLabel>
         <Select
-          labelId={`demo-multiple-chip-label-${props.label}`}
-          id={`demo-multiple-chip-${props.label}`}
+          labelId={`demo-multiple-chip-label-${label}`}
+          id={`demo-multiple-chip-${label}`}
           multiple
-          value={props.label === 'Source1' ? personName1 : personName2}
-          onChange={(e) => handleChange(e, props.label === 'Source1' ? 1 : 2)}
-          input={<OutlinedInput id={`select-multiple-chip-${props.label}`} label={props.label} />}
+          value={selectedColumns}
+          onChange={handleChange}
+          input={<OutlinedInput id={`select-multiple-chip-${label}`} label={label} />}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
               {selected.map((value) => (
@@ -77,18 +63,18 @@ function MultipleSelectChip(props) {
           )}
           MenuProps={MenuProps}
         >
-          {props.props.map((name) => (
+          {columns.map((column) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, props.label === 'Source1' ? personName1 : personName2, theme)}
+              key={column.name}
+              value={`${column.name} (${column.type})`}
+              style={getStyles(`${column.name} (${column.type})`, selectedColumns, theme)}
             >
-              {name}
+              {`${column.name} (${column.type})`}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-      {/* <ChildComponent variableValue={combinedValues} /> */}
+  
     </div>  
   );
 }
