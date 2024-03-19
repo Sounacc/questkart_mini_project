@@ -74,7 +74,7 @@ function Dbcomp1({ setOpenDbDialog, isDbDialogOpen,onSelections }) {
     setSelectedSchema(schema);
     // Fetch tables for the selected schema
     try {
-      const response = await fetch('http://localhost:3000/tables', {
+      const response = await fetch('http://localhost:4000/tables', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ function Dbcomp1({ setOpenDbDialog, isDbDialogOpen,onSelections }) {
     
     // Fetch columns for the selected table
     try {
-      const response = await fetch('http://localhost:3000/columns', {
+      const response = await fetch('http://localhost:4000/columns', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
