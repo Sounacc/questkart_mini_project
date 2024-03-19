@@ -1,0 +1,57 @@
+"sources":{
+
+        "source_01":{
+
+            "source_type": "files",
+
+            "location": "data/source1.csv"
+
+        },
+
+        "source_02":{
+
+            "source_type": "database",
+
+            "user": "user",
+
+            "password": "password",
+
+            "host": "localhost",
+
+            "port": "5432",
+
+            "database": "mydb",
+
+            "schema": "public",
+
+            "table_query": "table1"
+
+        },
+
+      // sources may interchange in type 
+
+    },
+
+    "operations":{
+
+        "join":{
+
+            "join_type":"inner",
+
+            "left_source":"Source1",
+
+            "right_source":"Source2",
+
+            "left_columns":["column_name_1_from_source_1","column_name_2_from_source_1"],
+
+            "right_columns":["column_name_1_from_source_2","column_name_2_from_source_2"]
+
+        },
+
+       
+
+    }
+
+ 
+
+}
