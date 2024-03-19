@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect}from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -29,7 +29,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-function MultipleSelectChip({ props: columns, label }) {
+function MultipleSelectChip({onSelections, columns, label }) {
   const theme = useTheme();
   const [selectedColumns, setSelectedColumns] = React.useState([]);
 
@@ -41,8 +41,12 @@ function MultipleSelectChip({ props: columns, label }) {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
+    onSelections(value, label);
+    
   };
-
+  useEffect(() => {
+    console.log("Updated Columns are:", selectedColumns);
+  }, [selectedColumns]);
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>

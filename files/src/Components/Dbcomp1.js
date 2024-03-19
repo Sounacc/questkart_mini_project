@@ -1,7 +1,6 @@
 import React, {useEffect, useState } from 'react';
 import { Button, Menu, MenuItem, Dialog, Select, FormControl, InputLabel, DialogContent } from '@mui/material';
 import PgDetails from './Pgdetails'; // Import your PgDetails component
-import ColumnsDisplay from './ColumnsDropdown'; 
 import Operation from './Operations'
 
 /**

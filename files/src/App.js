@@ -5,7 +5,7 @@ import FileDropdown from './Components/Source_Component';
 
 import DropDown from './Components/Dropdown'
 import Test from './Components/Dbcomp1'
-import ColumnsDisplay from './Components/ColumnsDropdown';
+
 
 
 function App() {
