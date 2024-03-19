@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select, Button, Box } from '@mui/material';
 
-function JoinOperationSelect() {
+function JoinOperationSelect({ selectedColumnsSource1, selectedColumnsSource2 }) {
   const [joinType, setJoinType] = useState('');
 
   const handleChange = (event) => {
     setJoinType(event.target.value);
+  };
+
+  const handleCompare = () => {
+    console.log(selectedColumnsSource1);
+    console.log(selectedColumnsSource2);
+    if (selectedColumnsSource1.length===0 && selectedColumnsSource2.length===0) {
+        alert('Please Select columns from both sources');
+    } else if(selectedColumnsSource1.length === selectedColumnsSource2.length){
+      alert("JSON is generated");
+    }
+    else {
+      alert('Length is not same');
+    }
+
+
   };
 
   return (
@@ -27,11 +42,7 @@ function JoinOperationSelect() {
       {/* Conditionally render the submit button if joinType is not empty */}
       {joinType && (
         <Button
-          onClick={()=>{
-            alert("JSON is  generated")
-          }}
-          variant="contained"
-          sx={{ alignSelf: 'center' }} // Center the button (useful if not using a wrapping Box)
+        onClick={handleCompare} // Center the button (useful if not using a wrapping Box)
         >
           Proceed
           

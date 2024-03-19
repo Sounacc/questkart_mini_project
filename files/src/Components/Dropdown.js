@@ -1,12 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef,useEffect } from 'react';
 import { Button, Menu, MenuItem } from '@mui/material';
 import Dbcomp1 from './Dbcomp1'; // Ensure this path matches your file structure
-import ColumnsDisplay from './ColumnsDropdown';
 import Papa from 'papaparse';
 import styles from './BasicExample.module.css';
-import { parse, isValid } from 'date-fns';
 
-function BasicExample(props) {
+
+function BasicExample({ onColumnsSelected, name }) {
   const [selectionType, setSelectionType] = useState(''); // Track what is selected ('file' or 'database')
   const [fileName, setFileName] = useState(''); // Track selected file's name
   // Updated to track database, schema, and table names
@@ -19,6 +18,20 @@ function BasicExample(props) {
   const [isDbDialogOpen, setIsDbDialogOpen] = useState(false);
   const fileInput = useRef(null);
   const [csvHeaders, setCsvHeaders] = useState([]);
+  const [source1Selections, setSource1Selections] = useState([]);
+const [source2Selections, setSource2Selections] = useState([]);
+const [isSource1Confirmed, setIsSource1Confirmed] = useState(false);
+const [isSource2Confirmed, setIsSource2Confirmed] = useState(false);
+
+const handleSelectionChange = (sourceName, selections) => {
+  if (sourceName === 'Source 1') {
+    setSource1Selections(selections);
+  } else if (sourceName === 'Source 2') {
+    setSource2Selections(selections);
+  }
+  console.log(`${sourceName} Selections: `, selections);
+  // console.log("comment"+source1Selections);
+};
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -145,6 +158,14 @@ const inferColumnType = (data, columnIndex) => {
     }
   };
 
+
+  useEffect(() => {
+    if (csvHeaders.length > 0) {
+      onColumnsSelected(csvHeaders);
+    }
+  }, [csvHeaders, onColumnsSelected]);
+
+
   return (
     <div className={styles.container}>
       <Button
@@ -168,7 +189,7 @@ const inferColumnType = (data, columnIndex) => {
     // Note: ':hover' pseudo-class cannot be used within inline styles
   }}
 >
-  {props.name}
+  {name}
 </Button>
 
       <Menu id="basic-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
@@ -182,9 +203,15 @@ const inferColumnType = (data, columnIndex) => {
         isDbDialogOpen={isDbDialogOpen}
         setOpenDbDialog={setIsDbDialogOpen}
         onSelections={handleSelections}
+        selectionsAreEqual={source1Selections.length === source2Selections.length} 
+      
       />
       {/* Conditional rendering based on selectionType */}
-      {selectionType && csvHeaders.length > 0 && <ColumnsDisplay columns={csvHeaders} label={props.name} />}
+      {/* {selectionType && csvHeaders.length > 0 && <ColumnsDisplay
+  columns={csvHeaders}
+  label={props.name}
+ 
+/>} */}
     </div>
   );
 }
