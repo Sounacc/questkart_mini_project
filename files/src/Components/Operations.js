@@ -8,16 +8,16 @@ function JoinOperationSelect({ selectedColumnsSource1, selectedColumnsSource2 })
     setJoinType(event.target.value);
   };
 
-  const handleCompare = () => {
+   const handleCompare = () => {
     console.log(selectedColumnsSource1);
     console.log(selectedColumnsSource2);
     if (selectedColumnsSource1.length===0 && selectedColumnsSource2.length===0) {
         alert('Please Select columns from both sources');
     } else if(selectedColumnsSource1.length === selectedColumnsSource2.length){
-      alert("JSON is generated");
+        alert("JSON Generated");
     }
     else {
-      alert('Length is not same');
+      alert('Please choose even keys to pair');
     }
 
 
@@ -42,7 +42,9 @@ function JoinOperationSelect({ selectedColumnsSource1, selectedColumnsSource2 })
       {/* Conditionally render the submit button if joinType is not empty */}
       {joinType && (
         <Button
-        onClick={handleCompare} // Center the button (useful if not using a wrapping Box)
+          onClick={handleCompare}
+          variant="contained"
+          sx={{ alignSelf: 'center' }} // Center the button (useful if not using a wrapping Box)
         >
           Proceed
           
