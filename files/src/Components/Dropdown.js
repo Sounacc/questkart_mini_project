@@ -5,7 +5,14 @@ import Papa from 'papaparse';
 import styles from './BasicExample.module.css';
 
 
-function BasicExample({ onColumnsSelected, name }) {
+function BasicExample({ onColumnsSelected, name, onSelectChange }) {
+  const [connectionDetails, setConnectionDetails] = useState({
+    user: '',
+    host: '',
+    database: '',
+    password: '',
+    port: 5432,
+  });
   const [selectionType, setSelectionType] = useState(''); // Track what is selected ('file' or 'database')
   const [fileName, setFileName] = useState(''); // Track selected file's name
   // Updated to track database, schema, and table names
@@ -145,7 +152,12 @@ const inferColumnType = (data, columnIndex) => {
       schemaName: schema,
       tableName: table,
     });
-    setCsvHeaders(columns); // Update headers for database columns
+    setCsvHeaders(columns);
+     // Update headers for database columns
+  };
+
+  const handleConnectionDetails = (connectionDetails) => {
+    setConnectionDetails(connectionDetails); // Update connectionDetails state in BasicExample
   };
 
   const selectionMessage = () => {
@@ -164,6 +176,11 @@ const inferColumnType = (data, columnIndex) => {
       onColumnsSelected(csvHeaders);
     }
   }, [csvHeaders, onColumnsSelected]);
+
+  useEffect(() => {
+    // Pass props to the parent component (SourceComponent) using callback functions
+    onSelectChange(selectionType, fileName, databaseDetails, connectionDetails);
+  }, [selectionType, fileName, databaseDetails, connectionDetails, onSelectChange]);
 
 
   return (
@@ -200,12 +217,12 @@ const inferColumnType = (data, columnIndex) => {
       <input type="file" ref={fileInput} onChange={handleFileChange} style={{ display: 'none' }} />
       <p className={styles.selectionMessage}>{selectionMessage()}</p>
       <Dbcomp1
-        isDbDialogOpen={isDbDialogOpen}
-        setOpenDbDialog={setIsDbDialogOpen}
-        onSelections={handleSelections}
-        selectionsAreEqual={source1Selections.length === source2Selections.length} 
-      
-      />
+          isDbDialogOpen={isDbDialogOpen}
+          setOpenDbDialog={setIsDbDialogOpen}
+          onSelections={handleSelections}
+          onConnectionDetails={handleConnectionDetails} // Pass connectionDetails here
+          selectionsAreEqual={source1Selections.length === source2Selections.length} 
+        />
       {/* Conditional rendering based on selectionType */}
       {/* {selectionType && csvHeaders.length > 0 && <ColumnsDisplay
   columns={csvHeaders}

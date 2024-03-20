@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select, Button, Box } from '@mui/material';
+import createJSONObject from './FinalJSON';
+import OperationJSONObject from './OperationJSON';
 
-function JoinOperationSelect({ selectedColumnsSource1, selectedColumnsSource2 }) {
+function JoinOperationSelect({ source_left,source_right,FileName1,FileName2,SelectionType1,SelectionType2, DatabaseDetails1,DatabaseDetails2,selectedColumnsSource1, selectedColumnsSource2 }) {
   const [joinType, setJoinType] = useState('');
 
   const handleChange = (event) => {
@@ -14,6 +16,9 @@ function JoinOperationSelect({ selectedColumnsSource1, selectedColumnsSource2 })
     if (selectedColumnsSource1.length===0 && selectedColumnsSource2.length===0) {
         alert('Please Select columns from both sources');
     } else if(selectedColumnsSource1.length === selectedColumnsSource2.length){
+      const op=OperationJSONObject(FileName1,FileName2,SelectionType1,SelectionType2,DatabaseDetails1,DatabaseDetails2,selectedColumnsSource1,selectedColumnsSource2,joinType)
+      const backendjson=createJSONObject(source_left,source_right,op)
+      console.log(backendjson)
       alert("JSON is generated");
     }
     else {

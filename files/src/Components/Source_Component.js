@@ -4,13 +4,45 @@ import Box from '@mui/material/Box';
 import Dropdown from './Dropdown'; // Ensure this is your converted Material-UI Dropdown
 import Operation from './Operations';
 import MultipleSelect from './MultipleSelect';
+import SourceJSONObject from './SourceJSON';
 
 export default function SourceComponent() {
+  const [databaseDetails1, setDatabaseDetails1] = useState({
+    databaseName: '',
+    schemaName: '',
+    tableName: '',
+  });
+  const [databaseDetails2, setDatabaseDetails2] = useState({
+    databaseName: '',
+    schemaName: '',
+    tableName: '',
+  });
+
+  const [fileName1, setFileName1] = useState('');
+  const [fileName2, setFileName2] = useState('');
+  const [selectionType1, setSelectionType1] = useState('');
+  const [selectionType2, setSelectionType2] = useState('');
+  const [connectionDetails1, setConnectionDetails1] = useState({
+    user: '',
+    host: '',
+    database: '',
+    password: '',
+    port: 5432,
+  });
+  const [connectionDetails2, setConnectionDetails2] = useState({
+    user: '',
+    host: '',
+    database: '',
+    password: '',
+    port: 5432,
+  });
   const [source1Columns, setSource1Columns] = useState([]);
   const [source2Columns, setSource2Columns] = useState([]);
   const [sourcesConfirmed, setSourcesConfirmed] = useState(false); // State to track if sources are confirmed
   const [selectedColumnsSource1, setSelectedColumnsSource1] = React.useState([]);
   const [selectedColumnsSource2, setSelectedColumnsSource2] = React.useState([]);
+  const[LeftSourceJSON, setLeftSourceJSON]=useState('')
+  const[RightSourceJSON, setRightSourceJSON]=useState('')
 
   // Function to handle selections made by the user
   const handleSelections = (selected, sourceLabel) => {
@@ -33,11 +65,26 @@ export default function SourceComponent() {
     setSourcesConfirmed(true); // Update state to indicate sources are confirmed
   };
 
+  
+  const handleDropdownSelection1 = (type, name, details, conndetails) => {
+    setSelectionType1(type);
+    setFileName1(name);
+    setDatabaseDetails1(details);
+    setConnectionDetails1(conndetails);// Pass connectionDetails to SourceComponent
+    setLeftSourceJSON(SourceJSONObject(details,name,type,conndetails))
+  };
+  const handleDropdownSelection2 = (type, name, details, conndetails) => {
+    setSelectionType2(type);
+    setFileName2(name);
+    setDatabaseDetails2(details);
+    setConnectionDetails2(conndetails);// Pass connectionDetails to SourceComponent
+    setRightSourceJSON(SourceJSONObject(details,name,type,conndetails))
+  };
   return (
     <Box sx={{ width: '100%', maxWidth: 900, mx: 'auto', my: 2 }}>
   <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
-    <Dropdown name="Source 1" onColumnsSelected={handleSource1Columns} />
-    <Dropdown name="Source 2" onColumnsSelected={handleSource2Columns} />
+    <Dropdown name="Source 1" onColumnsSelected={handleSource1Columns} onSelectChange={handleDropdownSelection1} />
+    <Dropdown name="Source 2" onColumnsSelected={handleSource2Columns} onSelectChange={handleDropdownSelection2} />
   </Box>
   {/* Button appears if both sources are selected but not yet confirmed */}
   {(source1Columns.length > 0 && source2Columns.length > 0 && !sourcesConfirmed) && (
@@ -66,7 +113,19 @@ export default function SourceComponent() {
   )}
   <Operation 
   selectedColumnsSource1={selectedColumnsSource1} 
-    selectedColumnsSource2={selectedColumnsSource2}  />
+  selectedColumnsSource2={selectedColumnsSource2}
+  source_left={LeftSourceJSON}
+  source_right={RightSourceJSON}
+  FileName1={fileName1}
+  FileName2={fileName2}
+  SelectionType1={selectionType1}
+  SelectionType2={selectionType2}
+  DatabaseDetails1={databaseDetails1}
+  DatabaseDetails2={databaseDetails2}
+  
+  // databaseDetails={databaseDetails}  
+
+      />
 </Box>
   );
 }

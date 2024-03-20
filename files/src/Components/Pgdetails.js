@@ -21,7 +21,7 @@ export default function Pgdetails(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:3000/connection', {
+      const response = await fetch('http://localhost:4000/connection', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,11 +30,12 @@ export default function Pgdetails(props) {
       });
       const data = await response.json();
       console.log('Submission Response:', data);
-      props.onCredentialsSubmit(data);
+      props.onCredentialsSubmit(data, connectionDetails); // Pass connectionDetails here
     } catch (error) {
       console.error('Error submitting form:', error);
     }
   };
+  
 
   return (
     <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit} sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}>
