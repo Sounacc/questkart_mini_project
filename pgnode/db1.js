@@ -3,7 +3,7 @@ const cors = require('cors');
 const { Pool } = require('pg');
 
 const app = express();
-const port = 3000;
+const port = 4000;
 
 app.use(cors());
 app.use(express.json());
@@ -66,6 +66,16 @@ app.post('/columns', async (req, res) => {
   } finally {
     await pool.end();
   }
+});
+
+app.post('/json',async (req,res)=>{
+const obj=req.body;
+console.log(obj);
+const leftColumns = obj.operations.join.left_columns;
+  const rightColumns = obj.operations.join.right_columns;
+
+  console.log('Left Columns:', leftColumns);
+  console.log('Right Columns:', rightColumns);
 });
 
 app.listen(port, () => {

@@ -15,7 +15,14 @@ import Operation from './Operations'
  */
 
 
-function Dbcomp1({ setOpenDbDialog, isDbDialogOpen,onSelections }) {
+function Dbcomp1({ setOpenDbDialog, isDbDialogOpen,onSelections, onConnectionDetails  }) {
+  const [connectionDetails, setConnectionDetails] = useState({
+    user: '',
+    host: '',
+    database: '',
+    password: '',
+    port: 5432,
+  });
   const [currentStep, setCurrentStep] = useState('dbChoice'); // New state to track dialog steps
   const [schemas, setSchemas] = useState([]);
   const [selectedDb, setSelectedDb] = useState(''); // New state for selected database
@@ -55,10 +62,14 @@ function Dbcomp1({ setOpenDbDialog, isDbDialogOpen,onSelections }) {
    * @param {Array} schemas - Array of schemas fetched based on credentials.
    */
   
-  const handleCredentialsSubmit = (schemas) => {
+  const handleCredentialsSubmit = (schemas, connectionDetails) => {
     setSchemas(schemas);
-    setCurrentStep('schemaSelection'); // Move to the next step
+    setCurrentStep('schemaSelection');
+    setConnectionDetails(connectionDetails);
+    onConnectionDetails(connectionDetails); // Pass connectionDetails to the parent component
+    console.log(connectionDetails);
   };
+  
 
   const handleDbChoice = (db) => {
     if (db !== selectedDb) {
@@ -73,7 +84,7 @@ function Dbcomp1({ setOpenDbDialog, isDbDialogOpen,onSelections }) {
     setSelectedSchema(schema);
     // Fetch tables for the selected schema
     try {
-      const response = await fetch('http://localhost:3000/tables', {
+      const response = await fetch('http://localhost:4000/tables', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +105,7 @@ function Dbcomp1({ setOpenDbDialog, isDbDialogOpen,onSelections }) {
     
     // Fetch columns for the selected table
     try {
-      const response = await fetch('http://localhost:3000/columns', {
+      const response = await fetch('http://localhost:4000/columns', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -136,7 +147,7 @@ const renderDialogContent = () => {
       return renderDbChoiceContent();
 
       case 'credentials':
-        return <PgDetails onCredentialsSubmit={handleCredentialsSubmit} />;
+        return <PgDetails connectionDetails={connectionDetails} onCredentialsSubmit={handleCredentialsSubmit}/>;
       case 'schemaSelection':
         return (
           <>

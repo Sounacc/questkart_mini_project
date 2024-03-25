@@ -1,20 +1,34 @@
 import React, { useState } from 'react';
 import { FormControl, InputLabel, MenuItem, Select, Button, Box } from '@mui/material';
+import createJSONObject from './FinalJSON';
+import OperationJSONObject from './OperationJSON';
 
-function JoinOperationSelect({ selectedColumnsSource1, selectedColumnsSource2 }) {
+function JoinOperationSelect({ source_left,source_right,FileName1,FileName2,SelectionType1,SelectionType2, DatabaseDetails1,DatabaseDetails2,selectedColumnsSource1, selectedColumnsSource2 }) {
   const [joinType, setJoinType] = useState('');
 
   const handleChange = (event) => {
     setJoinType(event.target.value);
   };
 
-   const handleCompare = () => {
+   const handleCompare = async() => {
     console.log(selectedColumnsSource1);
     console.log(selectedColumnsSource2);
     if (selectedColumnsSource1.length===0 && selectedColumnsSource2.length===0) {
         alert('Please Select columns from both sources');
     } else if(selectedColumnsSource1.length === selectedColumnsSource2.length){
-        alert("JSON Generated");
+      alert("JSON is generated");
+      const op=OperationJSONObject(FileName1,FileName2,SelectionType1,SelectionType2,DatabaseDetails1,DatabaseDetails2,selectedColumnsSource1,selectedColumnsSource2,joinType)
+      const backendjson=createJSONObject(source_left,source_right,op)
+      console.log(backendjson)
+      const response = await fetch('http://localhost:4000/json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(backendjson),
+      });
+      //const data = await response.json();
+     
     }
     else {
       alert('Please choose even keys to pair');
