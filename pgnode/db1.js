@@ -76,6 +76,48 @@ const leftColumns = obj.operations.join.left_columns;
 
   console.log('Left Columns:', leftColumns);
   console.log('Right Columns:', rightColumns);
+
+  const { spawn } = require('child_process');
+
+// Define the command and arguments
+const command = 'python';
+// jsonData=JSON.stringify({'source1': 'C:/Users/acer/Desktop/questkart/joins/obj.source_left.source.location',
+    //                     "source2": 'C:/Users/acer/Desktop/questkart/joins/obj.source_right.source.location',...// if you want to use it with orginal code then replace source 1 and source 2 with this code 
+
+const jsonData = JSON.stringify({
+  source1: obj.source_left.source.location,
+  source2: obj.source_right.source.location,
+  column1: obj.operations.join.left_columns[0].split(' ')[0], // Assuming you want just the column name without type
+  column2: obj.operations.join.right_columns[0].split(' ')[0], // Assuming you want just the column name without type
+  jointype: obj.operations.join.join_type.toLowerCase() // Assuming the join_type values directly map; adjust as necessary
+});
+
+console.log(jsonData);
+
+// Adjust the path to the Python script according to its location.
+// Here, it's assumed that your_script.js is located in the node_script folder,
+// and you want to access scripts.py located in the python_script folder.
+const args = ['C:/Users/sahil/Desktop/Project 1/Transformations_Backend-main/script.py', jsonData];
+
+// Spawn the child process
+const childProcess = spawn(command, args);
+
+// Listen for stdout data
+childProcess.stdout.on('data', (data) => {
+  console.log(`stdout: ${data}`);
+});
+
+// Listen for stderr data
+childProcess.stderr.on('data', (data) => {
+  console.error(`stderr: ${data}`);
+});
+
+// Listen for process exit
+childProcess.on('close', (code) => {
+  console.log(`Child process exited with code ${code}`);
+});
+
+  
 });
 
 app.listen(port, () => {
