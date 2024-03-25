@@ -1,0 +1,44 @@
+ "source_01":{
+            "source_type": "csv",
+            "location": "/home/krishna/questkart/df_backend/employee_data.csv"
+        },
+
+"source_02":{
+            "source_type": "database",
+            "user": "krishna",
+            "password": "password",
+            "host": "localhost",
+            "port": "5432",
+            "database": "sample",
+            "schema": "public",
+            "table_query": "departments"
+        },
+
+"destination":{
+            "destination_type": "database",
+            "user": "krishna",
+            "password": "password",
+            "host": "localhost",
+            "port": "5432",
+            "database": "sample",
+            "schema": "public",
+            "table_query": "merged"
+        },
+
+"destination":{
+            "destination_type": "csv",
+            "location": "/home/krishna/questkart/df_backend/merged_data.csv"
+        }
+
+
+
+"source_02":{
+            "source_type": "database",
+            "user": "pab123",
+            "password": "pab123",
+            "host": "localhost",
+            "port": "5432",
+            "database": "postgres",
+            "schema": "public",
+            "table_query": "projects"
+        }

@@ -1,0 +1,5 @@
+# Ignore all contents in the data folder
+data/*
+
+log/*
+myenv/*

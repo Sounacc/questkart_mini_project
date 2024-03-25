@@ -1,0 +1,33 @@
+2024-03-19 10:47:54,376 - INFO - Data fetched successfully from data/employees.csv
+2024-03-19 10:47:54,380 - INFO - Data fetched successfully from data/departments.csv
+2024-03-19 10:47:54,392 - INFO - Data preview of source source_01:
+   employee_id           name  department_id              position   salary   hire_date
+0            1       John Doe              1     Software Engineer  60000.0  2020-01-15
+1            2     Jane Smith              1          Data Analyst  55000.0  2019-07-20
+2            3  Alice Johnson              2            HR Manager  70000.0  2018-05-10
+3            4      Bob Brown              3  Marketing Specialist  65000.0  2021-03-05
+2024-03-19 10:47:54,397 - INFO - Memory usage of source source_01:
+411
+2024-03-19 10:47:54,408 - INFO - Data preview of source source_02:
+   department_id  department_name  manager_id
+0              1      Engineering           1
+1              2  Human Resources           3
+2              3        Marketing           4
+2024-03-19 10:47:54,410 - INFO - Memory usage of source source_02:
+223
+2024-03-19 10:47:54,426 - INFO - Data preview after iteration 1:
+   employee_id           name  department_id              position   salary   hire_date  department_name  manager_id
+0            1       John Doe              1     Software Engineer  60000.0  2020-01-15      Engineering           1
+1            2     Jane Smith              1          Data Analyst  55000.0  2019-07-20      Engineering           1
+2            3  Alice Johnson              2            HR Manager  70000.0  2018-05-10  Human Resources           3
+3            4      Bob Brown              3  Marketing Specialist  65000.0  2021-03-05        Marketing           4
+2024-03-19 10:47:54,427 - INFO - Merge operations completed successfully.
+2024-03-19 10:47:54,441 - INFO - Final Merged Data preview:
+   employee_id           name  department_id              position   salary   hire_date  department_name  manager_id
+0            1       John Doe              1     Software Engineer  60000.0  2020-01-15      Engineering           1
+1            2     Jane Smith              1          Data Analyst  55000.0  2019-07-20      Engineering           1
+2            3  Alice Johnson              2            HR Manager  70000.0  2018-05-10  Human Resources           3
+3            4      Bob Brown              3  Marketing Specialist  65000.0  2021-03-05        Marketing           4
+2024-03-19 10:47:54,453 - INFO - Memory usage of merged df:
+507
+2024-03-19 10:47:54,456 - INFO - Data stored successfully to CSV at merged/merged_data.csv

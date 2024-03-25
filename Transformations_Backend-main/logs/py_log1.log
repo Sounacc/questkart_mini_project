@@ -1,0 +1,45 @@
+2024-03-18 17:50:55,848 - INFO - Data fetched successfully from data/KernelVersions.csv
+2024-03-18 17:50:55,850 - INFO - Data fetched successfully from data/KernelVersions.csv
+2024-03-18 17:50:55,873 - INFO - Data preview of source source_01:
+naive plan: (run LazyFrame.explain(optimized=True) to see the optimized plan)
+
+SLICE[offset: 0, len: 5]
+
+    Csv SCAN data/KernelVersions.csv
+    PROJECT */19 COLUMNS
+2024-03-18 17:50:55,873 - INFO - Data preview of source source_02:
+naive plan: (run LazyFrame.explain(optimized=True) to see the optimized plan)
+
+SLICE[offset: 0, len: 5]
+
+    Csv SCAN data/KernelVersions.csv
+    PROJECT */19 COLUMNS
+2024-03-18 17:50:55,922 - INFO - Data preview after iteration 1:
+naive plan: (run LazyFrame.explain(optimized=True) to see the optimized plan)
+
+SLICE[offset: 0, len: 5]
+  INNER JOIN:
+  LEFT PLAN ON: [col("Id")]
+
+      Csv SCAN data/KernelVersions.csv
+      PROJECT */19 COLUMNS
+  RIGHT PLAN ON: [col("Id")]
+
+      Csv SCAN data/KernelVersions.csv
+      PROJECT */19 COLUMNS
+  END INNER JOIN
+2024-03-18 17:50:55,923 - INFO - Merge operations completed successfully.
+2024-03-18 17:50:55,923 - INFO - Final Merged Data preview:
+naive plan: (run LazyFrame.explain(optimized=True) to see the optimized plan)
+
+SLICE[offset: 0, len: 5]
+  INNER JOIN:
+  LEFT PLAN ON: [col("Id")]
+
+      Csv SCAN data/KernelVersions.csv
+      PROJECT */19 COLUMNS
+  RIGHT PLAN ON: [col("Id")]
+
+      Csv SCAN data/KernelVersions.csv
+      PROJECT */19 COLUMNS
+  END INNER JOIN
