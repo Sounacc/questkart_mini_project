@@ -85,11 +85,43 @@ const command = 'python';
     //                     "source2": 'C:/Users/acer/Desktop/questkart/joins/obj.source_right.source.location',...// if you want to use it with orginal code then replace source 1 and source 2 with this code 
 
 const jsonData = JSON.stringify({
-  source1: obj.source_left.source.location,
-  source2: obj.source_right.source.location,
-  column1: obj.operations.join.left_columns[0].split(' ')[0], // Assuming you want just the column name without type
-  column2: obj.operations.join.right_columns[0].split(' ')[0], // Assuming you want just the column name without type
-  jointype: obj.operations.join.join_type.toLowerCase() // Assuming the join_type values directly map; adjust as necessary
+  sources: {
+    source_01: {
+      source_type: obj.source_left.source.source_type,
+      location: obj.source_left.source.location,
+      host: obj.source_left.source.source.host,
+      user: obj.source_left.source.source.user,
+      port: obj.source_left.source.source.port,
+      password: obj.source_left.source.password,
+      database: obj.source_left.source.database,
+      schema: obj.source_left.source.schema,
+      table:obj.source_left.source.table_query
+    },
+    source_02: {
+      source_type: obj.source_right.source.source_type,
+      location: obj.source_right.source.location,
+      host: obj.source_right.source.host,
+      user: obj.source_right.source.user,
+      port:obj.source_right.source.port,
+      password: obj.source_right.source.password,
+      database: obj.source_right.source.database,
+      schema: obj.source_right.source.schema,
+      table:obj.source_right.source.table_query
+    }
+  },
+  operations: {
+    join_01: {
+      join_type: obj.operations.join.join_type.toLowerCase(),
+      left_source: obj.source_left.source.source_type==="file"? obj.source_left.source.location : obj.source_left.source.table_query,
+      right_source: obj.source_right.source.source_type=== "file" ? obj.source_right.source.location : obj.source_right.source.table_query,
+      left_columns: obj.operations.join.left_columns[0].split(' ')[0],
+      right_columns: obj.operations.join.right_columns[0].split(' ')[0]
+    }
+  },
+  destination: {
+    destination_type: "csv",
+    location: "filter/filtered_data.csv"
+  }
 });
 
 console.log(jsonData);
