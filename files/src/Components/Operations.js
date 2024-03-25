@@ -10,19 +10,28 @@ function JoinOperationSelect({ source_left,source_right,FileName1,FileName2,Sele
     setJoinType(event.target.value);
   };
 
-  const handleCompare = () => {
-    // console.log(selectedColumnsSource1);
-    // console.log(selectedColumnsSource2);
+   const handleCompare = async() => {
+    console.log(selectedColumnsSource1);
+    console.log(selectedColumnsSource2);
     if (selectedColumnsSource1.length===0 && selectedColumnsSource2.length===0) {
         alert('Please Select columns from both sources');
     } else if(selectedColumnsSource1.length === selectedColumnsSource2.length){
+      alert("JSON is generated");
       const op=OperationJSONObject(FileName1,FileName2,SelectionType1,SelectionType2,DatabaseDetails1,DatabaseDetails2,selectedColumnsSource1,selectedColumnsSource2,joinType)
       const backendjson=createJSONObject(source_left,source_right,op)
       console.log(backendjson)
-      alert("JSON is generated");
+      const response = await fetch('http://localhost:4000/json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(backendjson),
+      });
+      //const data = await response.json();
+     
     }
     else {
-      alert('Length is not same');
+      alert('Please choose even keys to pair');
     }
 
 
@@ -48,7 +57,9 @@ function JoinOperationSelect({ source_left,source_right,FileName1,FileName2,Sele
       {/* Conditionally render the submit button if joinType is not empty */}
       {joinType && (
         <Button
-        onClick={handleCompare} // Center the button (useful if not using a wrapping Box)
+          onClick={handleCompare}
+          variant="contained"
+          sx={{ alignSelf: 'center' }} // Center the button (useful if not using a wrapping Box)
         >
           Proceed
           

@@ -68,6 +68,16 @@ app.post('/columns', async (req, res) => {
   }
 });
 
+app.post('/json',async (req,res)=>{
+const obj=req.body;
+console.log(obj);
+const leftColumns = obj.operations.join.left_columns;
+  const rightColumns = obj.operations.join.right_columns;
+
+  console.log('Left Columns:', leftColumns);
+  console.log('Right Columns:', rightColumns);
+});
+
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
