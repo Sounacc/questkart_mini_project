@@ -29,10 +29,25 @@ function getStyles(name, personName, theme) {
   };
 }
 
-function MultipleSelectChip({onSelections, columns, label }) {
+/**
+ * Component for rendering a multiple select chip input.
+ * Allows the user to select multiple options from a list.
+ *
+ * @param {Object} props - Component props.
+ * @param {Function} props.onSelections - Function to handle selections made by the user.
+ * @param {Array} props.columns - Array of column objects containing name and type.
+ * @param {string} props.label - Label for the input field.
+ * @returns {React.Component} A React component for multiple select chip input.
+ */
+function MultipleSelectChip({ onSelections, columns, label }) {
   const theme = useTheme();
   const [selectedColumns, setSelectedColumns] = React.useState([]);
 
+  /**
+   * Handles the change event of the select input.
+   *
+   * @param {Object} event - The event object.
+   */
   const handleChange = (event) => {
     const {
       target: { value },
@@ -42,11 +57,13 @@ function MultipleSelectChip({onSelections, columns, label }) {
       typeof value === 'string' ? value.split(',') : value,
     );
     onSelections(value, label);
-    
   };
+
   useEffect(() => {
+    // Effect for handling changes in selected columns
     // console.log("Updated Columns are:", selectedColumns);
   }, [selectedColumns]);
+
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
@@ -78,8 +95,7 @@ function MultipleSelectChip({onSelections, columns, label }) {
           ))}
         </Select>
       </FormControl>
-  
-    </div>  
+    </div>
   );
 }
 
