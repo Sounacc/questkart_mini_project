@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "date-fns": "^3.6.0"
+    "date-fns": "^3.6.0",
+    "pandas": "^0.0.3"
   }
 }
