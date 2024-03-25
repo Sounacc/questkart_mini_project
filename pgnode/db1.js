@@ -88,7 +88,7 @@ const jsonData = JSON.stringify({
   sources: {
     source_01: {
       source_type: obj.source_left.source.source_type ==="file" ? "csv":obj.source_left.source.source_type,
-      location: obj.source_left.source.location,
+      location: "D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/data/"+obj.source_left.source.location,
       host: obj.source_left.source.source.host,
       user: obj.source_left.source.source.user,
       port: obj.source_left.source.source.port,
@@ -99,7 +99,7 @@ const jsonData = JSON.stringify({
     },
     source_02: {
       source_type: obj.source_right.source.source_type==="file"?"csv":obj.source_right.source.source_type,
-      location: obj.source_right.source.location,
+      location: "D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/data/"+ obj.source_right.source.location,
       host: obj.source_right.source.host,
       user: obj.source_right.source.user,
       port:obj.source_right.source.port,
@@ -120,7 +120,7 @@ const jsonData = JSON.stringify({
   },
   destination: {
     destination_type: "csv",
-    location: "filter/filtered_data.csv"
+    location: "questkart_mini_project/Transformations_Backend-main/merged/merged_data.csv"
   }
 });
 
@@ -129,7 +129,7 @@ console.log(jsonData);
 // Adjust the path to the Python script according to its location.
 // Here, it's assumed that your_script.js is located in the node_script folder,
 // and you want to access scripts.py located in the python_script folder.
-const args = ['C:/Users/sahil/Desktop/Project 1/Transformations_Backend-main/script.py', jsonData];
+const args = ['D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/script.py', jsonData];
 
 // Spawn the child process
 const childProcess = spawn(command, args);
