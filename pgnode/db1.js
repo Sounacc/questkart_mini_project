@@ -87,7 +87,7 @@ const command = 'python';
 const jsonData = JSON.stringify({
   sources: {
     source_01: {
-      source_type: obj.source_left.source.source_type,
+      source_type: obj.source_left.source.source_type ==="file" ? "csv":"other",
       location: obj.source_left.source.location,
       host: obj.source_left.source.source.host,
       user: obj.source_left.source.source.user,
@@ -98,7 +98,7 @@ const jsonData = JSON.stringify({
       table:obj.source_left.source.table_query
     },
     source_02: {
-      source_type: obj.source_right.source.source_type,
+      source_type: obj.source_right.source.source_type==="file"?"csv":"other",
       location: obj.source_right.source.location,
       host: obj.source_right.source.host,
       user: obj.source_right.source.user,
