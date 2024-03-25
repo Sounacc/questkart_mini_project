@@ -1,6 +1,4 @@
 export default function OperationJSONObject(fileName1, fileName2, selectionTypeSource1,selectionTypeSource2,databaseDetails1,databaseDetails2, selectedColumnsSource1, selectedColumnsSource2, joinType ) {
-    console.log(selectedColumnsSource2)
-    console.log(selectedColumnsSource1)
     // Construct the operations object
     const operations = {
       join: {

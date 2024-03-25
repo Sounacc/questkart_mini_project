@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from 'react';
-import { Button, Menu, MenuItem, Dialog, Select, FormControl, InputLabel, DialogContent } from '@mui/material';
+import { Button, MenuItem, Dialog, Select, FormControl, InputLabel, DialogContent } from '@mui/material';
 import PgDetails from './Pgdetails'; // Import your PgDetails component
 import Operation from './Operations'
 
@@ -67,7 +67,7 @@ function Dbcomp1({ setOpenDbDialog, isDbDialogOpen,onSelections, onConnectionDet
     setCurrentStep('schemaSelection');
     setConnectionDetails(connectionDetails);
     onConnectionDetails(connectionDetails); // Pass connectionDetails to the parent component
-    console.log(connectionDetails);
+    // console.log(connectionDetails);
   };
   
 
@@ -125,8 +125,8 @@ function Dbcomp1({ setOpenDbDialog, isDbDialogOpen,onSelections, onConnectionDet
     } catch (error) {
       console.error('Error fetching columns:', error);
     }
-    console.log(condition);
-    if(condition==2)
+    // console.log(condition);
+    if(condition===2)
     setOperationSelected(true);
   };
 

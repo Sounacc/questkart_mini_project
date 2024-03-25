@@ -2,7 +2,7 @@ export default function SourceJSONObject(databaseDetails, fileName, selectionTyp
     // Construct the sources object
     console.log()
     const sources = {
-      source_01: {
+      source: {
         source_type: selectionType === 'file' ? 'files' : 'database',
         location: selectionType === 'file' ? fileName : null,
         user: selectionType === 'database' ? connectionDetails.user : null,

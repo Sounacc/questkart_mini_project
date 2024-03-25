@@ -11,8 +11,8 @@ function JoinOperationSelect({ source_left,source_right,FileName1,FileName2,Sele
   };
 
   const handleCompare = () => {
-    console.log(selectedColumnsSource1);
-    console.log(selectedColumnsSource2);
+    // console.log(selectedColumnsSource1);
+    // console.log(selectedColumnsSource2);
     if (selectedColumnsSource1.length===0 && selectedColumnsSource2.length===0) {
         alert('Please Select columns from both sources');
     } else if(selectedColumnsSource1.length === selectedColumnsSource2.length){
@@ -42,6 +42,7 @@ function JoinOperationSelect({ source_left,source_right,FileName1,FileName2,Sele
           <MenuItem value="equijoin">Equijoin</MenuItem>
           <MenuItem value="left-join">Left Join</MenuItem>
           <MenuItem value="right-join">Right Join</MenuItem>
+          <MenuItem value="cross-Join">Cross Join</MenuItem>
         </Select>
       </FormControl>
       {/* Conditionally render the submit button if joinType is not empty */}

@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -45,7 +45,7 @@ function MultipleSelectChip({onSelections, columns, label }) {
     
   };
   useEffect(() => {
-    console.log("Updated Columns are:", selectedColumns);
+    // console.log("Updated Columns are:", selectedColumns);
   }, [selectedColumns]);
   return (
     <div>
