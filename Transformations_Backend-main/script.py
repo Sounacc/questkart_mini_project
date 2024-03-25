@@ -1,3 +1,4 @@
+import sys
 import pandas as pd
 import json
 import logging
@@ -5,7 +6,7 @@ import fetch
 import store 
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s',
-                    filename="logs/py_log.log",filemode="w")
+                    filename="Transformations_Backend-main/logs/py_log1.log",filemode="w")
 
 
 def join_operations(data_sources, operations):
@@ -49,8 +50,8 @@ def main():
     """
     print("Program has started...")
     try:
-        with open('common.json', 'r') as file:
-            data = json.load(file)
+        d=sys.argv[1]
+        data=json.loads(d)
 
         data_sources = {}
         for source_name, source_details in data['sources'].items():
