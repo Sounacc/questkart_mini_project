@@ -11,8 +11,8 @@ function JoinOperationSelect({ source_left,source_right,FileName1,FileName2,Sele
   };
 
    const handleCompare = async() => {
-    console.log(selectedColumnsSource1);
-    console.log(selectedColumnsSource2);
+    // console.log(selectedColumnsSource1);
+    // console.log(selectedColumnsSource2);
     if (selectedColumnsSource1.length===0 && selectedColumnsSource2.length===0) {
         alert('Please Select columns from both sources');
     } else if(selectedColumnsSource1.length === selectedColumnsSource2.length){
