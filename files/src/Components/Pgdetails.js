@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { TextField, Button, Box } from '@mui/material';
 
+/**
+ * Component for collecting PostgreSQL connection details.
+ * Allows the user to input PostgreSQL connection parameters.
+ *
+ * @param {Object} props - Component props.
+ * @param {Function} props.onCredentialsSubmit - Function to handle submission of connection details.
+ * @returns {React.Component} A React component for collecting PostgreSQL connection details.
+ */
 export default function Pgdetails(props) {
   const [connectionDetails, setConnectionDetails] = useState({
     user: '',
@@ -10,6 +18,11 @@ export default function Pgdetails(props) {
     port: 5432,
   });
 
+  /**
+   * Handles changes in input fields and updates connectionDetails state.
+   *
+   * @param {Object} e - The event object.
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setConnectionDetails(prevDetails => ({
@@ -18,6 +31,11 @@ export default function Pgdetails(props) {
     }));
   };
 
+  /**
+   * Handles form submission and triggers the onCredentialsSubmit callback.
+   *
+   * @param {Object} e - The event object.
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

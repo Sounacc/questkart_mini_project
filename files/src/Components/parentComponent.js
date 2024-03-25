@@ -4,6 +4,12 @@ import BasicExample from './Dropdown';
 import JoinOperationSelect from './Operations';
 import Pgdetails from './Pgdetails';
 
+/**
+ * Parent component that manages the state and renders child components for data comparison.
+ * Handles database connections, source selection, and join operation selection.
+ *
+ * @returns {React.Component} A React component for managing data comparison.
+ */
 function ParentComponent() {
   // State to hold various props
   const [databaseDetails, setDatabaseDetails] = useState({
