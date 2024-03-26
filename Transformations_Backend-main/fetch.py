@@ -4,7 +4,7 @@ import psycopg2
 import logging
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s',
-                    filename="logs/py_log.log",filemode="w")
+                    filename="C:/Users/sahil/Desktop/Project 1/Transformations_Backend-main/logs/py_log.log",filemode="w")
 
 # csv
 # sql
