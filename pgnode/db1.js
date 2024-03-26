@@ -72,12 +72,12 @@ app.post('/json',async (req,res)=>{
 const obj=req.body;
 console.log(obj);
 const leftColumns = obj.operations.join.left_columns;
-  const rightColumns = obj.operations.join.right_columns;
+const rightColumns = obj.operations.join.right_columns;
 
-  console.log('Left Columns:', leftColumns);
-  console.log('Right Columns:', rightColumns);
+console.log('Left Columns:', leftColumns);
+console.log('Right Columns:', rightColumns);
 
-  const { spawn } = require('child_process');
+const { spawn } = require('child_process');
 
 // Define the command and arguments
 const command = 'python';
