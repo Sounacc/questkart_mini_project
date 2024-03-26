@@ -19,7 +19,7 @@ export default function SourceJSONObject(databaseDetails, fileName, selectionTyp
       password: selectionType === 'database' ? connectionDetails.password : null,
       host: selectionType === 'database' ? connectionDetails.host : null,
       port: selectionType === 'database' ? connectionDetails.port : null,
-      database: selectionType === 'database' ? databaseDetails.databaseName : null,
+      database: selectionType === 'database' ? connectionDetails.database : null,
       schema: selectionType === 'database' ? databaseDetails.schemaName : null,
       table_query: selectionType === 'database' ? databaseDetails.tableName : null,
     },

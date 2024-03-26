@@ -3,8 +3,12 @@ import json
 import psycopg2
 import logging
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s',
-                    filename="C:/Users/sahil/Desktop/Project 1/Transformations_Backend-main/logs/py_log.log",filemode="w")
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    filename="D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/logs/py_log.log",
+    filemode="w",
+)
 
 # csv
 # sql
@@ -13,10 +17,11 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 # parquet
 # json
 
+
 def fetch_data_from_csv(csv_location):
     """
     Fetch data from a CSV file.
-    
+
     Parameters:
     csv_location (str): The file path to the CSV file.
 
@@ -28,7 +33,9 @@ def fetch_data_from_csv(csv_location):
         chunks = []
 
         # Iterate over the file in chunks
-        for chunk in pd.read_csv(csv_location, chunksize=10000, dtype_backend= "pyarrow"):
+        for chunk in pd.read_csv(
+            csv_location, chunksize=10000, dtype_backend="pyarrow"
+        ):
             # Process the chunk (e.g., data cleaning, analysis)
             chunks.append(chunk)
 
@@ -44,7 +51,8 @@ def fetch_data_from_csv(csv_location):
     except Exception as e:
         logging.error(f"Error fetching data from CSV at {csv_location}: {e}")
         raise
-    
+
+
 def fetch_data_from_sql(user, password, host, port, database, schema, table):
     """
     Fetch data from a SQL database.
@@ -65,12 +73,18 @@ def fetch_data_from_sql(user, password, host, port, database, schema, table):
     try:
         connection_string = f"postgresql://{user}:{password}@{host}:{port}/{database}"
         query = f"SELECT * FROM {schema}.{table}"
-        df = pd.read_sql(query, connection_string, dtype_backend= "pyarrow")
-        logging.info(f"Data fetched successfully from {schema}.{table} in the {database} database.")
+        df = pd.read_sql(query, connection_string, dtype_backend="pyarrow")
+        logging.info(
+            f"Data fetched successfully from {schema}.{table} in the {database} database."
+        )
         return df
     except Exception as e:
-        logging.error(f"Error fetching data from SQL database {database}, table {schema}.{table}: {e}")
+        logging.error(
+            f"Error fetching data from SQL database {database}, table {schema}.{table}: {e}"
+        )
         raise
+
+
 def fetch_data_from_xml(xml_location):
     """
     Fetch data from an XML file.
@@ -82,12 +96,13 @@ def fetch_data_from_xml(xml_location):
     pandas.DataFrame: DataFrame containing the data from the XML file.
     """
     try:
-        df=pd.read_xml(xml_location, dtype_backend= "pyarrow")
+        df = pd.read_xml(xml_location, dtype_backend="pyarrow")
         logging.info(f"Data fetched successfully from {xml_location}")
         return df
     except Exception as e:
         logging.error(f"Error fetching data from XML at {xml_location}: {e}")
         raise
+
 
 def fetch_data_from_excel(excel_location):
     """
@@ -100,12 +115,13 @@ def fetch_data_from_excel(excel_location):
     pandas.DataFrame: DataFrame containing the data from the Excel file.
     """
     try:
-        df = pd.read_excel(excel_location, dtype_backend= "pyarrow")
+        df = pd.read_excel(excel_location, dtype_backend="pyarrow")
         logging.info(f"Data fetched successfully from {excel_location}")
         return df
     except Exception as e:
         logging.error(f"Error fetching data from Excel at {excel_location}: {e}")
         raise
+
 
 def fetch_data_from_parquet(parquet_location):
     """
@@ -118,12 +134,13 @@ def fetch_data_from_parquet(parquet_location):
     pandas.DataFrame: DataFrame containing the data from the Parquet file.
     """
     try:
-        df = pd.read_parquet(parquet_location, dtype_backend= "pyarrow")
+        df = pd.read_parquet(parquet_location, dtype_backend="pyarrow")
         logging.info(f"Data fetched successfully from {parquet_location}")
         return df
     except Exception as e:
         logging.error(f"Error fetching data from Parquet at {parquet_location}: {e}")
         raise
+
 
 def fetch_data_from_json(json_location):
     """
@@ -136,7 +153,7 @@ def fetch_data_from_json(json_location):
     pandas.DataFrame: DataFrame containing the data from the JSON file.
     """
     try:
-        df = pd.read_json(json_location, dtype_backend= "pyarrow")
+        df = pd.read_json(json_location, dtype_backend="pyarrow")
         logging.info(f"Data fetched successfully from {json_location}")
         return df
     except Exception as e:

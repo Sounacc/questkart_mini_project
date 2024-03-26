@@ -8,7 +8,7 @@ import store
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
-    filename="C:/Users/sahil/Desktop/Project 1/Transformations_Backend-main/script.py",
+    filename="D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/script.py",
     filemode="w",
 )
 

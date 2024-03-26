@@ -1,37 +1,31 @@
-2024-03-25 20:02:11,107 - INFO - Data fetched successfully from C:/Users/sahil/Desktop/questkart/dept.csv
-2024-03-25 20:02:11,111 - INFO - Data fetched successfully from C:/Users/sahil/Desktop/questkart/emp.csv
-2024-03-25 20:02:11,121 - INFO - Data preview of source source_01:
-   department_id  department_name  manager_id
-0              1      Engineering           1
-1              2  Human Resources           3
-2              3        Marketing           4
-2024-03-25 20:02:11,123 - INFO - Memory usage of source source_01:
-227
-2024-03-25 20:02:11,136 - INFO - Data preview of source source_02:
-   employee_id           name  ...   salary   hire_date
-0            1       John Doe  ...  60000.0  2020-01-15
-1            2     Jane Smith  ...  55000.0  2019-07-20
-2            3  Alice Johnson  ...  70000.0  2018-05-10
-3            4      Bob Brown  ...  65000.0  2021-03-05
+2024-03-26 14:57:20,900 - INFO - Data fetched successfully from public.employee in the Datawarehouse database.
+2024-03-26 14:57:20,972 - INFO - Data fetched successfully from staging.customer in the Datawarehouse database.
+2024-03-26 14:57:20,990 - INFO - Data preview of source source_01:
+   employee_id last_name  ...                fax                     email
+0            1     Adams  ...  +1 (780) 428-3457    andrew@chinookcorp.com
+1            2   Edwards  ...  +1 (403) 262-3322     nancy@chinookcorp.com
+2            3   Peacock  ...  +1 (403) 262-6712      jane@chinookcorp.com
+3            4      Park  ...  +1 (403) 263-4289  margaret@chinookcorp.com
+4            5   Johnson  ...   1 (780) 836-9543     steve@chinookcorp.com
 
-[4 rows x 6 columns]
-2024-03-25 20:02:11,138 - INFO - Memory usage of source source_02:
-415
-2024-03-25 20:02:11,160 - INFO - Data preview after iteration 1:
-   department_id_x  department_name  ...   salary   hire_date
-0                1      Engineering  ...  60000.0  2020-01-15
-1                2  Human Resources  ...  70000.0  2018-05-10
-2                3        Marketing  ...  65000.0  2021-03-05
-
-[3 rows x 9 columns]
-2024-03-25 20:02:11,161 - INFO - Merge operations completed successfully.
-2024-03-25 20:02:11,177 - INFO - Final Merged Data preview:
-   department_id_x  department_name  ...   salary   hire_date
-0                1      Engineering  ...  60000.0  2020-01-15
-1                2  Human Resources  ...  70000.0  2018-05-10
-2                3        Marketing  ...  65000.0  2021-03-05
-
-[3 rows x 9 columns]
-2024-03-25 20:02:11,196 - INFO - Memory usage of merged df:
-448
-2024-03-25 20:02:11,213 - INFO - Data stored successfully to CSV at C:/Users/sahil/Desktop/questkart/merged_data_1.csv
+[5 rows x 15 columns]
+2024-03-26 14:57:20,991 - INFO - Memory usage of source source_01:
+1705
+2024-03-26 14:57:20,991 - INFO - Data preview of source source_02:
+Empty DataFrame
+Columns: [customer_id, first_name, last_name, company, address, city, state, country, postal_code, phone, fax, email, support_rep_id]
+Index: []
+2024-03-26 14:57:20,992 - INFO - Memory usage of source source_02:
+132
+2024-03-26 14:57:20,996 - INFO - Data preview after iteration 1:
+Empty DataFrame
+Columns: [employee_id, last_name_x, first_name_x, title, reports_to, birth_date, hire_date, address_x, city_x, state_x, country_x, postal_code_x, phone_x, fax_x, email_x, customer_id, first_name_y, last_name_y, company, address_y, city_y, state_y, country_y, postal_code_y, phone_y, fax_y, email_y, support_rep_id]
+Index: []
+2024-03-26 14:57:20,996 - INFO - Merge operations completed successfully.
+2024-03-26 14:57:20,997 - INFO - Final Merged Data preview:
+Empty DataFrame
+Columns: [employee_id, last_name_x, first_name_x, title, reports_to, birth_date, hire_date, address_x, city_x, state_x, country_x, postal_code_x, phone_x, fax_x, email_x, customer_id, first_name_y, last_name_y, company, address_y, city_y, state_y, country_y, postal_code_y, phone_y, fax_y, email_y, support_rep_id]
+Index: []
+2024-03-26 14:57:20,999 - INFO - Memory usage of merged df:
+132
+2024-03-26 14:57:21,001 - INFO - Data stored successfully to CSV at D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/merged/merged_data.csv
