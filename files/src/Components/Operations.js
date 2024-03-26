@@ -88,10 +88,10 @@ function JoinOperationSelect({
           label="Join Operation"
           onChange={handleChange}
         >
-          <MenuItem value="equijoin">Equijoin</MenuItem>
-          <MenuItem value="left-join">Left Join</MenuItem>
-          <MenuItem value="right-join">Right Join</MenuItem>
-          <MenuItem value="cross-Join">Cross Join</MenuItem>
+          <MenuItem value="inner">Inner Join</MenuItem>
+          <MenuItem value="left">Left Join</MenuItem>
+          <MenuItem value="right">Right Join</MenuItem>
+          <MenuItem value="outer">Outer Join</MenuItem>
         </Select>
       </FormControl>
       {joinType && (

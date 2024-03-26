@@ -84,52 +84,53 @@ const command = 'python';
 // jsonData=JSON.stringify({'source1': 'C:/Users/acer/Desktop/questkart/joins/obj.source_left.source.location',
     //                     "source2": 'C:/Users/acer/Desktop/questkart/joins/obj.source_right.source.location',...// if you want to use it with orginal code then replace source 1 and source 2 with this code 
 
-const jsonData = JSON.stringify({
-  sources: {
-    source_01: {
-      source_type: obj.source_left.source.source_type ==="file" ? "csv":obj.source_left.source.source_type,
-      location: "D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/data/"+obj.source_left.source.location,
-      host: obj.source_left.source.source.host,
-      user: obj.source_left.source.source.user,
-      port: obj.source_left.source.source.port,
-      password: obj.source_left.source.password,
-      database: obj.source_left.source.database,
-      schema: obj.source_left.source.schema,
-      table:obj.source_left.source.table_query
-    },
-    source_02: {
-      source_type: obj.source_right.source.source_type==="file"?"csv":obj.source_right.source.source_type,
-      location: "D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/data/"+ obj.source_right.source.location,
-      host: obj.source_right.source.host,
-      user: obj.source_right.source.user,
-      port:obj.source_right.source.port,
-      password: obj.source_right.source.password,
-      database: obj.source_right.source.database,
-      schema: obj.source_right.source.schema,
-      table:obj.source_right.source.table_query
-    }
-  },
-  operations: {
-    join_01: {
-      join_type: obj.operations.join.join_type.toLowerCase(),
-      left_source: obj.source_left.source.source_type==="file"? obj.source_left.source.location : obj.source_left.source.table_query,
-      right_source: obj.source_right.source.source_type=== "file" ? obj.source_right.source.location : obj.source_right.source.table_query,
-      left_columns: obj.operations.join.left_columns[0].split(' ')[0],
-      right_columns: obj.operations.join.right_columns[0].split(' ')[0]
-    }
-  },
-  destination: {
-    destination_type: "csv",
-    location: "questkart_mini_project/Transformations_Backend-main/merged/merged_data.csv"
-  }
-});
+    const jsonData = JSON.stringify({
+      sources: {
+        source_01: {
+          source_type: obj.source_left.source.source_type === "files" ? "csv" : obj.source_left.source.source_type,
+          location: "C:/Users/sahil/Desktop/questkart/"+obj.source_left.source.location,
+          host: obj.source_left.source.host, // Directly under source_left.source
+          user: obj.source_left.source.user, // Directly under source_left.source
+          port: obj.source_left.source.port, // Directly under source_left.source
+          password: obj.source_left.source.password, // Directly under source_left.source
+          database: obj.source_left.source.database, // Directly under source_left.source
+          schema: obj.source_left.source.schema, // Directly under source_left.source
+          table: obj.source_left.source.table_query // Directly under source_left.source, but seems to be null in your JSON
+      },
+      source_02: {
+          source_type: obj.source_right.source.source_type === "files" ? "csv" : obj.source_right.source.source_type,
+          location: "C:/Users/sahil/Desktop/questkart/"+obj.source_right.source.location,
+          host: obj.source_right.source.host, // Directly under source_right.source
+          user: obj.source_right.source.user, // Directly under source_right.source
+          port: obj.source_right.source.port, // Directly under source_right.source
+          password: obj.source_right.source.password, // Directly under source_right.source
+          database: obj.source_right.source.database, // Directly under source_right.source
+          schema: obj.source_right.source.schema, // Directly under source_right.source
+          table: obj.source_right.source.table_query // Directly under source_right.source, but seems to be null in your JSON
+      }
+      },
+      operations: {
+        join_01: {
+          join_type: obj.operations.join.join_type.toLowerCase(),
+          left_source: obj.source_left.source.source_type === "files" ? obj.source_left.source.location : obj.source_left.source.table_query,
+          right_source: obj.source_right.source.source_type === "files" ? obj.source_right.source.location : obj.source_right.source.table_query,
+          left_columns: obj.operations.join.left_columns[0].split(' ')[0], // Assuming left_columns is properly defined in your actual object
+          right_columns: obj.operations.join.right_columns[0].split(' ')[0] // Assuming right_columns is properly defined in your actual object
+      }
+      },
+      destination: {
+        destination_type: "csv",
+        location: "C:/Users/sahil/Desktop/questkart/merged_data_1.csv"
+      }
+    });
+    
 
 console.log(jsonData);
 
 // Adjust the path to the Python script according to its location.
 // Here, it's assumed that your_script.js is located in the node_script folder,
 // and you want to access scripts.py located in the python_script folder.
-const args = ['D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/script.py', jsonData];
+const args = ['C:/Users/sahil/Desktop/Project 1/Transformations_Backend-main/script.py', jsonData];
 
 // Spawn the child process
 const childProcess = spawn(command, args);

@@ -5,6 +5,7 @@ import FileDropdown from './Components/Source_Component';
 
 import DropDown from './Components/Dropdown'
 import Test from './Components/Dbcomp1'
+import Save from './Components/Save'
 
 
 
@@ -20,6 +21,7 @@ function App() {
         {/* <FileUpload/> */}
         {/* <MUI/> */}
         {/* <Test/> */}
+        <Save/>
       </header>
     </div>
     </>

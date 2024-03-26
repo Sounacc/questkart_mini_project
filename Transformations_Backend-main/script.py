@@ -8,7 +8,7 @@ import store
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
-    filename="Transformations_Backend-main/logs/py_log.log",
+    filename="C:/Users/sahil/Desktop/Project 1/Transformations_Backend-main/script.py",
     filemode="w",
 )
 

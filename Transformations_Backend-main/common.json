@@ -21,7 +21,7 @@
     },
     "destination":{
         "destination_type": "csv",
-        "location": "merged/merged_data.csv"
+        "location": "merged/merged_data_1.csv"
     }
 
 }
