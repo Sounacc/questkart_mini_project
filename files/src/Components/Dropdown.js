@@ -40,12 +40,23 @@ const handleSelectionChange = (sourceName, selections) => {
   // console.log("comment"+source1Selections);
 };
 
-  const handleFileChange = (event) => {
+const handleFileChange = (event) => {
     const file = event.target.files[0];
-    if (file) {
+    console.log(file.type);
+    if (file.type==='text/csv') {
       setFileName(file.name);
-      setSelectionType('file');
+      setSelectionType('csv');
       parseCsvHeaders(file);
+    }
+    else if(file.type==='text/xml'){
+      setFileName(file.name);
+      setSelectionType('xml');
+      parseXmlHeaders(file);
+    }
+    else if(file.type==='application/json'){
+      setFileName(file.name);
+      setSelectionType('json');
+      readJsonHeaders(file);
     }
   };
 
@@ -60,6 +71,92 @@ const handleSelectionChange = (sourceName, selections) => {
   });
 };
 
+const parseXmlHeaders= (file) =>{
+  const reader = new FileReader();
+
+  reader.onload = (event) => {
+    const xmlString = event.target.result;
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+
+    const headers = [];
+    const dataTypeMap = new Map();
+
+    // Assuming the first child of the root element contains headers
+    const firstRow = xmlDoc.documentElement.firstElementChild;
+    if (firstRow) {
+      // Extract headers
+      firstRow.childNodes.forEach((node) => {
+        if (node.nodeName !== '#text') {
+          const headerName = node.nodeName;
+          headers.push(headerName);
+
+          // For simplicity, you can set the data type of each header to 'String' initially
+          dataTypeMap.set(headerName, 'String');
+        }
+      });
+
+    }
+
+    const headersWithTypes = headers.map((header) => ({ name: header, type: dataTypeMap.get(header) }));
+    setCsvHeaders(headersWithTypes);
+    // console.log(headersWithTypes);
+  };
+
+  reader.readAsText(file);
+};
+
+const readJsonHeaders = (file) => {
+  const reader = new FileReader();
+  const dataTypeMap = new Map();
+
+  reader.onload = (event) => {
+    const jsonString = event.target.result;
+    try {
+      const jsonData = JSON.parse(jsonString);
+      
+      if (Array.isArray(jsonData)) {
+        // Assuming the first object in the array contains the headers
+        const headers = Object.keys(jsonData[0]);
+        headers.forEach((header) => {
+          const dataType = inferDataType(jsonData[0][header]);
+          dataTypeMap.set(header, dataType);
+        });
+        const headersWithTypes = headers.map((header) => ({ name: header, type: dataTypeMap.get(header) }));
+        setCsvHeaders(headersWithTypes);
+        console.log(headersWithTypes);
+      } else if (typeof jsonData === 'object') {
+        // If it's a single object, treat its keys as headers
+        const headers = Object.keys(jsonData);
+        headers.forEach((header) => {
+          const dataType = inferDataType(jsonData[header]);
+          dataTypeMap.set(header, dataType);
+        });
+        const headersWithTypes = headers.map((header) => ({ name: header, type: dataTypeMap.get(header) }));
+        setCsvHeaders(headersWithTypes);
+        console.log(headersWithTypes);
+      } else {
+        console.error('Invalid JSON format: The JSON data must be an array or an object.');
+      }
+    } catch (error) {
+      console.error('Error parsing JSON:', error);
+    }
+  };
+
+  reader.readAsText(file);
+};
+
+const inferDataType = (value) => {
+  if (typeof value === 'number') {
+    return 'Number';
+  } else if (typeof value === 'boolean') {
+    return 'Boolean';
+  } else if (value instanceof Date && !isNaN(value)) {
+    return 'Date';
+  } else {
+    return 'String';
+  }
+};
 
 
 const inferColumnType = (data, columnIndex) => {
@@ -161,11 +258,19 @@ const inferColumnType = (data, columnIndex) => {
   };
 
   const selectionMessage = () => {
-    if (selectionType === 'file') {
+    if (selectionType === 'csv') {
       return `Selected File: ${fileName}`;
-    } else if (selectionType === 'database') {
+    }
+    else if(selectionType === 'xml'){
+      return `Selected File: ${fileName}`;
+    }
+    else if(selectionType === 'json'){
+      return `Selected File: ${fileName}`;
+    } 
+    else if (selectionType === 'database') {
       return `DB- ${databaseDetails.databaseName}, Schema - ${databaseDetails.schemaName}, Table - ${databaseDetails.tableName}`;
-    } else {
+    } 
+    else {
       return 'No selection';
     }
   };
@@ -214,7 +319,7 @@ const inferColumnType = (data, columnIndex) => {
         <MenuItem onClick={handleOpenDbDialog}>Database</MenuItem>
         {/* <MenuItem onClick={handleClose}>App</MenuItem> */}
       </Menu>
-      <input type="file" ref={fileInput} onChange={handleFileChange} style={{ display: 'none' }} />
+      <input className={styles.SourceDropdown} type="file" ref={fileInput} onChange={handleFileChange}/>
       <p className={styles.selectionMessage}>{selectionMessage()}</p>
       <Dbcomp1
           isDbDialogOpen={isDbDialogOpen}

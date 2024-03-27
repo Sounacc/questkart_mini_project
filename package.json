@@ -4,6 +4,7 @@
     "pandas": "^0.0.3"
   },
   "devDependencies": {
-    "@playwright/test": "^1.42.1"
+    "@playwright/test": "^1.42.1",
+    "expect-playwright":"^1.7.3"
   }
 }

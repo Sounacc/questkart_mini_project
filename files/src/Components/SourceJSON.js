@@ -13,8 +13,8 @@ export default function SourceJSONObject(databaseDetails, fileName, selectionTyp
   // Construct the sources object
   const sources = {
     source: {
-      source_type: selectionType === 'file' ? 'files' : 'database',
-      location: selectionType === 'file' ? fileName : null,
+      source_type: selectionType === 'database' ? 'database' : selectionType,
+      location: selectionType === 'text/csv' ||'text/xml' || 'application/json'? fileName : null,
       user: selectionType === 'database' ? connectionDetails.user : null,
       password: selectionType === 'database' ? connectionDetails.password : null,
       host: selectionType === 'database' ? connectionDetails.host : null,

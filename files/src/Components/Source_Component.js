@@ -88,7 +88,7 @@ export default function SourceComponent() {
   };
   return (
     <Box sx={{ width: '100%', maxWidth: 900, mx: 'auto', my: 2 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 42 }}>
         <Dropdown name="Source 1" onColumnsSelected={handleSource1Columns} onSelectChange={handleDropdownSelection1} />
         <Dropdown name="Source 2" onColumnsSelected={handleSource2Columns} onSelectChange={handleDropdownSelection2} />
       </Box>
