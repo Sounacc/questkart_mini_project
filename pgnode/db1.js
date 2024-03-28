@@ -125,7 +125,7 @@ console.log('Left Columns:', leftColumns);
 console.log('Right Columns:', rightColumns);
 
   const { spawn } = require('child_process');
-  const loc="C:/Users/sahil/Desktop/questkart/"
+  const loc="D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/data/"
 
 // Define the command and arguments
 const command = 'python';
@@ -175,7 +175,7 @@ const command = 'python';
         port:obj.operations.destination.port,
         schema:obj.operations.destination.schema,
         table_query:obj.operations.destination.table_query,
-        location: "C:/Users/sahil/Desktop/questkart/merged_data_1.csv"
+        location: "Transformations_Backend-main/merged/merged_data_1.csv"
       }
     });
     
@@ -185,7 +185,7 @@ console.log(jsonData);
 // Adjust the path to the Python script according to its location.
 // Here, it's assumed that your_script.js is located in the node_script folder,
 // and you want to access scripts.py located in the python_script folder.
-const scriptPath = 'C:/Users/sahil/Desktop/Project 1/Transformations_Backend-main/script.py';
+const scriptPath = 'D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/script.py';
 
   // Spawn the Python process
   const pythonProcess = spawn(command, [scriptPath, jsonData]);
