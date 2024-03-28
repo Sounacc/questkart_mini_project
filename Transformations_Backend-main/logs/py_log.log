@@ -1,39 +1,39 @@
-2024-03-28 11:18:07,695 - INFO - Data fetched successfully from D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/data/projects.csv
-2024-03-28 11:18:07,726 - INFO - Data fetched successfully from D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/data/employees.json
-2024-03-28 11:18:07,726 - INFO - Data preview of source source_01:
+2024-03-28 13:29:22,427 - INFO - Data fetched successfully from D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/data/employees.csv
+2024-03-28 13:29:22,429 - INFO - Data fetched successfully from D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/data/projects.csv
+2024-03-28 13:29:22,437 - INFO - Data preview of source source_01:
+   employee_id           name  ...   salary   hire_date
+0            1       John Doe  ...  60000.0  2020-01-15
+1            2     Jane Smith  ...  55000.0  2019-07-20
+2            3  Alice Johnson  ...  70000.0  2018-05-10
+3            4      Bob Brown  ...  65000.0  2021-03-05
+
+[4 rows x 6 columns]
+2024-03-28 13:29:22,438 - INFO - Memory usage of source source_01:
+415
+2024-03-28 13:29:22,442 - INFO - Data preview of source source_02:
    project_id               project_name  department_id  start_date    end_date
 0           1           Website Redesign              1  2023-01-10  2023-06-30
 1           2  Employee Training Program              2  2022-08-15  2023-02-28
 2           3    Product Launch Campaign              3  2022-12-01  2023-04-15
-2024-03-28 11:18:07,726 - INFO - Memory usage of source source_01:
+2024-03-28 13:29:22,443 - INFO - Memory usage of source source_02:
 340
-2024-03-28 11:18:07,742 - INFO - Data preview of source source_02:
-   employee_id           name  ...  salary   hire_date
-0            1       John Doe  ...   60000  2020-01-15
-1            2     Jane Smith  ...   55000  2019-07-20
-2            3  Alice Johnson  ...   70000  2018-05-10
-3            4      Bob Brown  ...   65000  2021-03-05
-
-[4 rows x 6 columns]
-2024-03-28 11:18:07,742 - INFO - Memory usage of source source_02:
-415
-2024-03-28 11:18:07,758 - INFO - Data preview after iteration 1:
-   project_id               project_name  ...  salary   hire_date
-0           1           Website Redesign  ...   60000  2020-01-15
-1           1           Website Redesign  ...   55000  2019-07-20
-2           2  Employee Training Program  ...   70000  2018-05-10
-3           3    Product Launch Campaign  ...   65000  2021-03-05
+2024-03-28 13:29:22,456 - INFO - Data preview after iteration 1:
+   employee_id           name  ...  start_date    end_date
+0            1       John Doe  ...  2023-01-10  2023-06-30
+1            2     Jane Smith  ...  2023-01-10  2023-06-30
+2            3  Alice Johnson  ...  2022-08-15  2023-02-28
+3            4      Bob Brown  ...  2022-12-01  2023-04-15
 
 [4 rows x 10 columns]
-2024-03-28 11:18:07,758 - INFO - Merge operations completed successfully.
-2024-03-28 11:18:07,758 - INFO - Final Merged Data preview:
-   project_id               project_name  ...  salary   hire_date
-0           1           Website Redesign  ...   60000  2020-01-15
-1           1           Website Redesign  ...   55000  2019-07-20
-2           2  Employee Training Program  ...   70000  2018-05-10
-3           3    Product Launch Campaign  ...   65000  2021-03-05
+2024-03-28 13:29:22,456 - INFO - Merge operations completed successfully.
+2024-03-28 13:29:22,464 - INFO - Final Merged Data preview:
+   employee_id           name  ...  start_date    end_date
+0            1       John Doe  ...  2023-01-10  2023-06-30
+1            2     Jane Smith  ...  2023-01-10  2023-06-30
+2            3  Alice Johnson  ...  2022-08-15  2023-02-28
+3            4      Bob Brown  ...  2022-12-01  2023-04-15
 
 [4 rows x 10 columns]
-2024-03-28 11:18:07,773 - INFO - Memory usage of merged df:
-660
-2024-03-28 11:18:07,773 - INFO - Data stored successfully to CSV at Transformations_Backend-main/merged/merged_data_1.csv
+2024-03-28 13:29:22,472 - INFO - Memory usage of merged df:
+659
+2024-03-28 13:29:22,475 - INFO - Data stored successfully to CSV at Transformations_Backend-main/merged/merged_data_1.csv

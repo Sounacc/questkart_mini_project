@@ -1,5 +1,5 @@
-project_id,project_name,department_id,start_date,end_date,employee_id,name,position,salary,hire_date
-1,Website Redesign,1,2023-01-10,2023-06-30,1,John Doe,Software Engineer,60000,2020-01-15
-1,Website Redesign,1,2023-01-10,2023-06-30,2,Jane Smith,Data Analyst,55000,2019-07-20
-2,Employee Training Program,2,2022-08-15,2023-02-28,3,Alice Johnson,HR Manager,70000,2018-05-10
-3,Product Launch Campaign,3,2022-12-01,2023-04-15,4,Bob Brown,Marketing Specialist,65000,2021-03-05
+employee_id,name,department_id,position,salary,hire_date,project_id,project_name,start_date,end_date
+1,John Doe,1,Software Engineer,60000.0,2020-01-15,1,Website Redesign,2023-01-10,2023-06-30
+2,Jane Smith,1,Data Analyst,55000.0,2019-07-20,1,Website Redesign,2023-01-10,2023-06-30
+3,Alice Johnson,2,HR Manager,70000.0,2018-05-10,2,Employee Training Program,2022-08-15,2023-02-28
+4,Bob Brown,3,Marketing Specialist,65000.0,2021-03-05,3,Product Launch Campaign,2022-12-01,2023-04-15
