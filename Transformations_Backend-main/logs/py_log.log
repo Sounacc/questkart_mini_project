@@ -1,42 +1,37 @@
-2024-03-27 17:49:44,238 - INFO - Data fetched successfully from D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/data/employees.json
-2024-03-27 17:49:44,238 - INFO - Data fetched successfully from D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/data/employees.json
-2024-03-27 17:49:44,254 - INFO - Data preview of source source_01:
-   employee_id           name  ...  salary   hire_date
-0            1       John Doe  ...   60000  2020-01-15
-1            2     Jane Smith  ...   55000  2019-07-20
-2            3  Alice Johnson  ...   70000  2018-05-10
-3            4      Bob Brown  ...   65000  2021-03-05
+2024-03-25 20:02:11,107 - INFO - Data fetched successfully from C:/Users/sahil/Desktop/questkart/dept.csv
+2024-03-25 20:02:11,111 - INFO - Data fetched successfully from C:/Users/sahil/Desktop/questkart/emp.csv
+2024-03-25 20:02:11,121 - INFO - Data preview of source source_01:
+   department_id  department_name  manager_id
+0              1      Engineering           1
+1              2  Human Resources           3
+2              3        Marketing           4
+2024-03-25 20:02:11,123 - INFO - Memory usage of source source_01:
+227
+2024-03-25 20:02:11,136 - INFO - Data preview of source source_02:
+   employee_id           name  ...   salary   hire_date
+0            1       John Doe  ...  60000.0  2020-01-15
+1            2     Jane Smith  ...  55000.0  2019-07-20
+2            3  Alice Johnson  ...  70000.0  2018-05-10
+3            4      Bob Brown  ...  65000.0  2021-03-05
 
 [4 rows x 6 columns]
-2024-03-27 17:49:44,254 - INFO - Memory usage of source source_01:
+2024-03-25 20:02:11,138 - INFO - Memory usage of source source_02:
 415
-2024-03-27 17:49:44,254 - INFO - Data preview of source source_02:
-   employee_id           name  ...  salary   hire_date
-0            1       John Doe  ...   60000  2020-01-15
-1            2     Jane Smith  ...   55000  2019-07-20
-2            3  Alice Johnson  ...   70000  2018-05-10
-3            4      Bob Brown  ...   65000  2021-03-05
+2024-03-25 20:02:11,160 - INFO - Data preview after iteration 1:
+   department_id_x  department_name  ...   salary   hire_date
+0                1      Engineering  ...  60000.0  2020-01-15
+1                2  Human Resources  ...  70000.0  2018-05-10
+2                3        Marketing  ...  65000.0  2021-03-05
 
-[4 rows x 6 columns]
-2024-03-27 17:49:44,254 - INFO - Memory usage of source source_02:
-415
-2024-03-27 17:49:44,269 - INFO - Data preview after iteration 1:
-   employee_id         name_x  ...  salary_y hire_date_y
-0            1       John Doe  ...     60000  2020-01-15
-1            2     Jane Smith  ...     55000  2019-07-20
-2            3  Alice Johnson  ...     70000  2018-05-10
-3            4      Bob Brown  ...     65000  2021-03-05
+[3 rows x 9 columns]
+2024-03-25 20:02:11,161 - INFO - Merge operations completed successfully.
+2024-03-25 20:02:11,177 - INFO - Final Merged Data preview:
+   department_id_x  department_name  ...   salary   hire_date
+0                1      Engineering  ...  60000.0  2020-01-15
+1                2  Human Resources  ...  70000.0  2018-05-10
+2                3        Marketing  ...  65000.0  2021-03-05
 
-[4 rows x 11 columns]
-2024-03-27 17:49:44,269 - INFO - Merge operations completed successfully.
-2024-03-27 17:49:44,285 - INFO - Final Merged Data preview:
-   employee_id         name_x  ...  salary_y hire_date_y
-0            1       John Doe  ...     60000  2020-01-15
-1            2     Jane Smith  ...     55000  2019-07-20
-2            3  Alice Johnson  ...     70000  2018-05-10
-3            4      Bob Brown  ...     65000  2021-03-05
-
-[4 rows x 11 columns]
-2024-03-27 17:49:44,301 - INFO - Memory usage of merged df:
-666
-2024-03-27 17:49:44,301 - INFO - Data stored successfully to CSV at D:/project/questkart_task/questkart_mini_project/Transformations_Backend-main/merged/merged_data.csv
+[3 rows x 9 columns]
+2024-03-25 20:02:11,196 - INFO - Memory usage of merged df:
+448
+2024-03-25 20:02:11,213 - INFO - Data stored successfully to CSV at C:/Users/sahil/Desktop/questkart/merged_data_1.csv

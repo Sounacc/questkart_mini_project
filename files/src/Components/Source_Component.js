@@ -78,6 +78,7 @@ export default function SourceComponent() {
     setDatabaseDetails1(details);
     setConnectionDetails1(conndetails);// Pass connectionDetails to SourceComponent
     setLeftSourceJSON(SourceJSONObject(details,name,type,conndetails))
+    
   };
   const handleDropdownSelection2 = (type, name, details, conndetails) => {
     setSelectionType2(type);
@@ -86,6 +87,22 @@ export default function SourceComponent() {
     setConnectionDetails2(conndetails);// Pass connectionDetails to SourceComponent
     setRightSourceJSON(SourceJSONObject(details,name,type,conndetails))
   };
+  React.useEffect(() => {
+    console.log("Source name 1: " + fileName1);
+}, [fileName1]);
+
+React.useEffect(() => {
+    console.log("Source name 2: " + fileName2);
+}, [fileName2]);
+
+React.useEffect(() => {
+  console.log("db name 1: " + databaseDetails1.databaseName);
+}, [databaseDetails1]);
+
+React.useEffect(() => {
+  console.log("db name 2: " + databaseDetails2[0]);
+}, [databaseDetails2]);
+
   return (
     <Box sx={{ width: '100%', maxWidth: 900, mx: 'auto', my: 2 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 42 }}>
@@ -93,27 +110,30 @@ export default function SourceComponent() {
         <Dropdown name="Source 2" onColumnsSelected={handleSource2Columns} onSelectChange={handleDropdownSelection2} />
       </Box>
       {/* Button appears if both sources are selected but not yet confirmed */}
-      {(source1Columns.length > 0 && source2Columns.length > 0 && !sourcesConfirmed) && (
+      {/* {(source1Columns.length > 0 && source2Columns.length > 0 && !sourcesConfirmed) && (
         <Box sx={{ display: 'flex', justifyContent: 'center', my: 2 }}>
           <Button variant="contained" onClick={handleConfirmSources}>
             Confirm Sources
           </Button>
         </Box>
-      )}
+      )} */}
       {/* ColumnsDisplay component is rendered only after sources are confirmed */}
-      {sourcesConfirmed && (
+      {(source1Columns.length > 0 && source2Columns.length > 0) && (
         <Box sx={{ display: 'flex', justifyContent: 'space-between', gap: 2, mt: 2 }}>
           <MultipleSelect 
             columns={source1Columns} 
             label="Source 1" 
             selected={selectedColumnsSource1} 
             onSelections={handleSelections}
+            resetTrigger={fileName1+databaseDetails1.databaseName+databaseDetails1.schemaName+databaseDetails1.tableName}
           />
+         
           <MultipleSelect 
             columns={source2Columns} 
             label="Source 2" 
             selected={selectedColumnsSource2} 
             onSelections={handleSelections}
+             resetTrigger={fileName2+databaseDetails2.databaseName+databaseDetails2.schemaName+databaseDetails2.tableName}
           />
         </Box>
       )}

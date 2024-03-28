@@ -128,7 +128,10 @@ def main():
             raise Exception("Source Type not compatible")
 
     except Exception as e:
+        sys.stderr.write(str(e))
         logging.error(f"Failed to complete data processing: {e}")
+        sys.exit(1) 
+       
 
     print("Program has ended.")
 
