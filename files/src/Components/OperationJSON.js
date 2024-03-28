@@ -12,7 +12,7 @@
  * @param {string} joinType - The type of join operation.
  * @returns {Object} A JSON object representing the operations to be performed.
  */
-export default function OperationJSONObject(fileName1, fileName2, selectionTypeSource1, selectionTypeSource2, databaseDetails1, databaseDetails2, selectedColumnsSource1, selectedColumnsSource2, joinType) {
+export default function OperationJSONObject(fileName1, fileName2, selectionTypeSource1, selectionTypeSource2, databaseDetails1, databaseDetails2, selectedColumnsSource1, selectedColumnsSource2, joinType,selectedSchema,selectedTable,destinationType,host1,user1,database1,pass,port1) {
   // Construct the operations object
   const operations = {
     join: {
@@ -22,6 +22,17 @@ export default function OperationJSONObject(fileName1, fileName2, selectionTypeS
       left_columns: selectedColumnsSource1,
       right_columns: selectedColumnsSource2,
     },
+    destination: {
+      destination_type:destinationType,
+      user:user1,
+      host:host1,
+      database:database1,
+      password:pass,
+      port:port1,
+      schema:selectedSchema,
+      table_query:selectedTable
+
+    }
   };
 
   // Construct the operation json

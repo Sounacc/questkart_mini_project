@@ -39,7 +39,7 @@ function getStyles(name, personName, theme) {
  * @param {string} props.label - Label for the input field.
  * @returns {React.Component} A React component for multiple select chip input.
  */
-function MultipleSelectChip({ onSelections, columns, label }) {
+function MultipleSelectChip({ onSelections, columns, label,resetTrigger }) {
   const theme = useTheme();
   const [selectedColumns, setSelectedColumns] = React.useState([]);
 
@@ -59,10 +59,17 @@ function MultipleSelectChip({ onSelections, columns, label }) {
     onSelections(value, label);
   };
 
-  useEffect(() => {
-    // Effect for handling changes in selected columns
-    // console.log("Updated Columns are:", selectedColumns);
-  }, [selectedColumns]);
+  React.useEffect(() => {
+    // This effect uses the resetTrigger to reset the component's state
+    setSelectedColumns([]);
+    // You might also want to call onSelections to update the parent state
+    // onSelections([], label);
+  }, [resetTrigger]);
+
+  // useEffect(() => {
+  //   // Effect for handling changes in selected columns
+  //   // console.log("Updated Columns are:", selectedColumns);
+  // }, [selectedColumns]);
 
   return (
     <div>
